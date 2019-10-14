@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.techprimers.testing</groupId>
+    <groupId>com.gk.testing</groupId>
     <artifactId>jenkins-example</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>v1.0</version>
 
 
     <properties>
@@ -54,19 +54,38 @@
         </dependency>
 
     </dependencies>
+   
+<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+<dependency>
+<groupId>org.sonarsource.scanner.maven</groupId>
+<artifactId>sonar-maven-plugin</artifactId>
+<version>3.2</version>
+</dependency>
 
-    <repositories>
-        <repository>
-            <id>myMavenRepo.read</id>
-            <url>https://mymavenrepo.com/repo/FN8PIshHk5uALNhkXbhs/</url>
-        </repository>
-    </repositories>
+<profiles>
+<profile>
+<id>sonar</id>
+<activation>
+<activeByDefault>true</activeByDefault>
+</activation>
+<properties>
+<!-- Optional URL to server. Default value is http://localhost:9000 -->
+<sonar.host.url>
+http://192.168.44.147:9000
+</sonar.host.url>
+</properties>
+</profile>
+</profiles>
 
     <distributionManagement>
-        <repository>
-            <id>myMavenRepo.write</id>
-            <url>https://mymavenrepo.com/repo/9Q8JoRpymi4UGK8HzbVq/</url>
-        </repository>
-    </distributionManagement>
+    <repository>
+      <id>releases</id>
+      <url>http://192.168.44.147:8081/repository/mytest_artifact/</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <url>http://192.168.44.147:8081/repository/mytest_snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
 
 </project>
