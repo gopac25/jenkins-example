@@ -20,7 +20,14 @@ pipeline {
             }
         }
 
-
+        stage ('Code Analysis') {
+            steps {
+                withMaven(maven : 'maven_3_5_0') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+        
         stage ('Deployment Stage') {
             steps {
                 withMaven(maven : 'maven_3_5_0') {
